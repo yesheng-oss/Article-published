@@ -1,0 +1,44 @@
+{
+  "name": "@personal/browser-mcp-server",
+  "version": "0.1.0",
+  "description": "Personal browser MCP server that bridges AI clients with a Chrome extension",
+  "type": "module",
+  "main": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./bridge": "./dist/exports.js"
+  },
+  "bin": {
+    "browser-mcp": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "browser",
+    "mcp",
+    "codex",
+    "websocket",
+    "bridge"
+  ],
+  "author": "Personal",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "express": "^4.21.0",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.10.2",
+    "@types/ws": "^8.5.13",
+    "tsup": "^8.5.1",
+    "typescript": "^5.7.2"
+  }
+}

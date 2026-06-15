@@ -1,0 +1,22 @@
+{
+  "name": "browser-mcp-assistant",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Personal browser MCP bridge that connects AI agents to a Chrome extension.",
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm --workspaces run build",
+    "build:mcp": "npm --workspace @personal/browser-mcp-server run build",
+    "build:extension": "npm --workspace @personal/browser-publish-extension run build",
+    "dev": "npm --workspace @personal/browser-mcp-server run dev",
+    "mcp": "npm --workspace @personal/browser-mcp-server run start",
+    "typecheck": "npm --workspaces run typecheck",
+    "test": "npm --workspaces --if-present run test"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "manifest_version": 3,
+  "name": "小叶发布器",
+  "description": "连接浏览器登录状态与 MCP 客户端，把 AI 生成的文章保存到常用平台草稿箱。",
+  "version": "0.1.0",
+  "icons": {
+    "16": "assets/icon-16.png",
+    "48": "assets/icon-48.png",
+    "128": "assets/icon-128.png"
+  },
+  "action": {
+    "default_icon": "assets/icon-48.png",
+    "default_popup": "src/popup/index.html"
+  },
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "cookies",
+    "declarativeNetRequest",
+    "declarativeNetRequestWithHostAccess",
+    "scripting",
+    "tabs",
+    "alarms",
+    "contextMenus",
+    "downloads"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "service_worker": "src/background/index.ts",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["src/content/api.ts"],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": ["https://mp.weixin.qq.com/s/*", "https://mp.weixin.qq.com/s?*"],
+      "js": ["src/content/weixin.ts"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["https://mp.weixin.qq.com/cgi-bin/appmsg*"],
+      "js": ["src/content/weixin-editor.ts"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["https://mp.toutiao.com/*"],
+      "js": ["src/content/toutiao.ts"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["src/content/extractor.ts"],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["assets/*", "src/editor/index.html", "src/sync-dialog/index.html", "inject-api.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

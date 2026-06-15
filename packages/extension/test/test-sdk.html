@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文章同步助手 SDK 测试页</title>
+  <!-- SDK CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wechatsync/article-syncjs@latest/dist/styles.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    h1 {
+      color: #333;
+      border-bottom: 2px solid #07c160;
+      padding-bottom: 10px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #333;
+    }
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    textarea {
+      min-height: 200px;
+      font-family: monospace;
+    }
+    .btn {
+      background: #07c160;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    .btn:hover {
+      background: #06ad56;
+    }
+    .btn-secondary {
+      background: #576b95;
+    }
+    .btn-secondary:hover {
+      background: #4a5d80;
+    }
+    .info {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      padding: 15px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+    .info code {
+      background: #f8f9fa;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+    .preview {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    .preview h3 {
+      margin-top: 0;
+      color: #666;
+    }
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    .tab {
+      padding: 8px 16px;
+      background: #eee;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .tab.active {
+      background: #07c160;
+      color: white;
+    }
+    .content-preview {
+      border: 1px solid #eee;
+      padding: 15px;
+      border-radius: 4px;
+      max-height: 300px;
+      overflow: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>文章同步助手 SDK 测试页</h1>
+
+  <div class="info">
+    <strong>使用说明：</strong>
+    <ol>
+      <li>确保已安装 <a href="https://chrome.google.com/webstore/detail/wechatsync" target="_blank">文章同步助手</a> 浏览器扩展</li>
+      <li>填写文章信息（标题、摘要、内容、封面图）</li>
+      <li>点击 <code>拉起同步框</code> 按钮调用 <code>window.syncPost()</code></li>
+    </ol>
+  </div>
+
+  <div class="form-group">
+    <label for="title">文章标题</label>
+    <input type="text" id="title" value="测试文章 - SDK 同步测试">
+  </div>
+
+  <div class="form-group">
+    <label for="desc">文章摘要</label>
+    <input type="text" id="desc" value="这是一篇用于测试文章同步助手 SDK 的示例文章，包含各种格式的内容。">
+  </div>
+
+  <div class="form-group">
+    <label for="thumb">封面图 URL</label>
+    <input type="text" id="thumb" value="https://picsum.photos/800/400">
+  </div>
+
+  <div class="form-group">
+    <label>文章内容</label>
+    <div class="tabs">
+      <button class="tab active" data-tab="html" onclick="switchTab('html')">HTML</button>
+      <button class="tab" data-tab="preview" onclick="switchTab('preview')">预览</button>
+    </div>
+    <div id="tab-html">
+      <textarea id="content"><h2>这是一篇测试文章</h2>
+<p>这是一段普通的文本内容，用于测试<strong>加粗</strong>和<em>斜体</em>效果。</p>
+
+<h3>列表测试</h3>
+<ul>
+  <li>无序列表项 1</li>
+  <li>无序列表项 2
+    <ul>
+      <li>嵌套列表项 2.1</li>
+      <li>嵌套列表项 2.2</li>
+    </ul>
+  </li>
+  <li>无序列表项 3</li>
+</ul>
+
+<h3>有序列表</h3>
+<ol>
+  <li>第一步</li>
+  <li>第二步</li>
+  <li>第三步</li>
+</ol>
+
+<h3>代码块测试</h3>
+<pre><code>function hello() {
+  console.log('Hello, World!');
+}
+</code></pre>
+
+<h3>引用测试</h3>
+<blockquote>
+  <p>这是一段引用文字，来自某位名人的名言。</p>
+</blockquote>
+
+<h3>表格测试</h3>
+<table>
+  <thead>
+    <tr>
+      <th>平台</th>
+      <th>状态</th>
+      <th>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>知乎</td>
+      <td>支持</td>
+      <td>支持 HTML</td>
+    </tr>
+    <tr>
+      <td>掘金</td>
+      <td>支持</td>
+      <td>支持 Markdown</td>
+    </tr>
+    <tr>
+      <td>CSDN</td>
+      <td>支持</td>
+      <td>支持 Markdown</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>图片测试</h3>
+<p><img src="https://picsum.photos/600/300" alt="示例图片"></p>
+
+<h3>链接测试</h3>
+<p>这是一个<a href="https://github.com/nicethings/wechatsync">外部链接</a>，在微信中会被自动移除。</p>
+
+<p>完。</p></textarea>
+    </div>
+    <div id="tab-preview" style="display: none;">
+      <div class="content-preview" id="preview-content"></div>
+    </div>
+  </div>
+
+  <div style="margin-top: 20px;">
+    <button class="btn" onclick="doSync()">拉起同步框</button>
+    <button class="btn btn-secondary" onclick="testAPI()">测试 $poster API</button>
+  </div>
+
+  <div class="preview" id="result" style="display: none;">
+    <h3>API 调用结果</h3>
+    <pre id="result-content"></pre>
+  </div>
+
+  <!-- SDK JS -->
+  <script src="https://cdn.jsdelivr.net/gh/wechatsync/article-syncjs@latest/dist/main.js"></script>
+
+  <script>
+    // 切换标签页
+    function switchTab(tab) {
+      document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+      document.querySelector(`.tab[data-tab="${tab}"]`).classList.add('active');
+
+      if (tab === 'html') {
+        document.getElementById('tab-html').style.display = 'block';
+        document.getElementById('tab-preview').style.display = 'none';
+      } else {
+        document.getElementById('tab-html').style.display = 'none';
+        document.getElementById('tab-preview').style.display = 'block';
+        document.getElementById('preview-content').innerHTML = document.getElementById('content').value;
+      }
+    }
+
+    // 显示结果
+    function showResult(data) {
+      document.getElementById('result').style.display = 'block';
+      document.getElementById('result-content').textContent = JSON.stringify(data, null, 2);
+    }
+
+    // 拉起同步框
+    function doSync() {
+      const data = {
+        title: document.getElementById('title').value,
+        desc: document.getElementById('desc').value,
+        content: document.getElementById('content').value,
+        thumb: document.getElementById('thumb').value,
+      };
+
+      console.log('Calling window.syncPost with:', data);
+
+      if (typeof window.syncPost === 'function') {
+        window.syncPost(data);
+        showResult({ status: 'success', message: 'syncPost 已调用', data });
+      } else {
+        showResult({
+          status: 'error',
+          message: 'window.syncPost 不可用，请确保已加载 SDK 并安装扩展',
+          sdkLoaded: typeof window.syncPost !== 'undefined',
+          posterAvailable: typeof window.$poster !== 'undefined'
+        });
+      }
+    }
+
+    // 测试 $poster API
+    function testAPI() {
+      if (typeof window.$poster !== 'undefined') {
+        console.log('Testing $poster.getAccounts...');
+        window.$poster.getAccounts(function(result) {
+          console.log('getAccounts result:', result);
+          showResult({
+            status: 'success',
+            message: '$poster.getAccounts 调用成功',
+            accounts: result
+          });
+        });
+      } else {
+        showResult({
+          status: 'error',
+          message: 'window.$poster 不可用，请确保已安装扩展并刷新页面'
+        });
+      }
+    }
+
+    // 页面加载时检查 API 状态
+    window.addEventListener('load', function() {
+      console.log('Page loaded');
+      console.log('window.syncPost available:', typeof window.syncPost === 'function');
+      console.log('window.$poster available:', typeof window.$poster !== 'undefined');
+      console.log('window.$syncer available:', typeof window.$syncer !== 'undefined');
+    });
+  </script>
+</body>
+</html>

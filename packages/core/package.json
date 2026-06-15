@@ -1,0 +1,63 @@
+{
+  "name": "@wechatsync/core",
+  "version": "2.0.0",
+  "description": "WechatSync 核心逻辑 - 平台适配器、运行时抽象、同步引擎",
+  "main": "./src/index.ts",
+  "module": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts",
+      "require": "./src/index.ts"
+    },
+    "./adapters": {
+      "types": "./src/adapters/index.ts",
+      "import": "./src/adapters/index.ts",
+      "require": "./src/adapters/index.ts"
+    },
+    "./runtime": {
+      "types": "./src/runtime/index.ts",
+      "import": "./src/runtime/index.ts",
+      "require": "./src/runtime/index.ts"
+    }
+  },
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@types/marked": "^6.0.0",
+    "jszip": "^3.10.1",
+    "hast-util-to-string": "^3.0.0",
+    "js-md5": "^0.8.3",
+    "juice": "^11.1.0",
+    "linkedom": "^0.18.12",
+    "markdown-draft-js": "^2.4.0",
+    "marked": "^17.0.1",
+    "rehype-parse": "^9.0.0",
+    "rehype-remark": "^10.0.0",
+    "rehype-stringify": "^10.0.0",
+    "remark-gfm": "^4.0.0",
+    "remark-parse": "^11.0.0",
+    "remark-stringify": "^11.0.0",
+    "remarkable": "^2.0.1",
+    "turndown": "^7.2.2",
+    "unified": "^11.0.0",
+    "unist-util-visit": "^5.0.0",
+    "yaml": "^2.3.4",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/remarkable": "^2.0.8",
+    "@types/turndown": "^5.0.6",
+    "tsup": "^8.0.1",
+    "vitest": "^1.1.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

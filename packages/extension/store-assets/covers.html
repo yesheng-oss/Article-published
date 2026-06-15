@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>WechatSync Store Assets</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: #f5f5f5;
+      padding: 40px;
+    }
+
+    .section-title {
+      font-size: 14px;
+      color: #666;
+      margin: 40px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .section-title:first-child {
+      margin-top: 0;
+    }
+
+    /* 标题衬线字体（与落地页 heading-serif 一致） */
+    .banner-large h1,
+    .banner-small h1,
+    .screenshot .title,
+    .feature-text h2,
+    .update-header h1,
+    .wechat-cover-title h2 {
+      font-family: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', Georgia, serif;
+    }
+
+    /* ========== 大横幅 1280x800 ========== */
+    .banner-large {
+      width: 1280px;
+      height: 800px;
+      background: linear-gradient(135deg, #6b5dae 0%, #3aaed1 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .banner-large::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 80%, rgba(255,255,255,0.08) 0%, transparent 40%);
+    }
+
+    .banner-large .logo {
+      width: 160px;
+      height: 160px;
+      background: white;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      margin-bottom: 48px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .banner-large .logo svg {
+      width: 100px;
+      height: 100px;
+    }
+
+    .banner-large h1 {
+      font-size: 64px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 24px;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 1;
+    }
+
+    .banner-large .tagline {
+      font-size: 32px;
+      color: rgba(255,255,255,0.9);
+      font-weight: 500;
+      position: relative;
+      z-index: 1;
+    }
+
+    .banner-large .features {
+      display: flex;
+      gap: 60px;
+      margin-top: 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .banner-large .feature {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: white;
+      font-size: 22px;
+      font-weight: 500;
+    }
+
+    .banner-large .feature-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ========== 小横幅 440x280 ========== */
+    .banner-small {
+      width: 440px;
+      height: 280px;
+      background: linear-gradient(135deg, #6b5dae 0%, #3aaed1 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .banner-small::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 150%;
+      height: 150%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+    }
+
+    .banner-small .logo {
+      width: 72px;
+      height: 72px;
+      background: white;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .banner-small .logo svg {
+      width: 44px;
+      height: 44px;
+    }
+
+    .banner-small h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .banner-small .tagline {
+      font-size: 16px;
+      color: rgba(255,255,255,0.85);
+      font-weight: 500;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ========== 截图样式 1280x800 ========== */
+    .screenshot {
+      width: 1280px;
+      height: 800px;
+      background: linear-gradient(180deg, #f5f0fa 0%, #eef8fb 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .screenshot .title {
+      font-size: 48px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .screenshot .subtitle {
+      font-size: 24px;
+      color: #666;
+      margin-bottom: 48px;
+    }
+
+    .screenshot .mockup {
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+    }
+
+    /* 浏览器窗口样式 */
+    .browser-window {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 20px 80px rgba(0,0,0,0.15);
+      overflow: hidden;
+    }
+
+    .browser-header {
+      height: 48px;
+      background: #f5f5f5;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 8px;
+    }
+
+    .browser-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .browser-dot.red { background: #ff5f57; }
+    .browser-dot.yellow { background: #ffbd2e; }
+    .browser-dot.green { background: #28c840; }
+
+    .browser-url {
+      flex: 1;
+      height: 28px;
+      background: white;
+      border-radius: 6px;
+      margin-left: 12px;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      font-size: 13px;
+      color: #666;
+    }
+
+    .browser-content {
+      padding: 24px;
+      background: #fafafa;
+    }
+
+    /* Popup 模拟 */
+    .popup-mockup {
+      width: 380px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      overflow: hidden;
+    }
+
+    .popup-header {
+      background: linear-gradient(135deg, #6b5dae 0%, #3aaed1 100%);
+      padding: 20px;
+      color: white;
+    }
+
+    .popup-header h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .popup-header p {
+      font-size: 13px;
+      opacity: 0.85;
+    }
+
+    .popup-platforms {
+      padding: 16px 20px;
+    }
+
+    .popup-platform {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: #f5f5f5;
+      border-radius: 10px;
+      margin-bottom: 8px;
+    }
+
+    .popup-platform.selected {
+      background: #edf8fc;
+      border: 2px solid #3aaed1;
+    }
+
+    .popup-platform-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: #ddd;
+      object-fit: contain;
+    }
+
+    .popup-platform-name {
+      flex: 1;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .popup-check {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #3aaed1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .popup-btn {
+      margin: 16px 20px 20px;
+      background: linear-gradient(135deg, #6b5dae 0%, #3aaed1 100%);
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      width: calc(100% - 40px);
+    }
+
+    /* ========== 功能截图 ========== */
+    .feature-screenshot {
+      width: 1280px;
+      height: 800px;
+      background: linear-gradient(135deg, #6b5dae 0%, #3aaed1 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-screenshot::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .feature-text {
+      max-width: 480px;
+      color: white;
+      position: relative;
+      z-index: 1;
+    }
+
+    .feature-text .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .feature-text h2 {
+      font-size: 56px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    .feature-text p {
+      font-size: 22px;
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+
+    .feature-visual {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* 平台卡片组 */
+    .platform-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .platform-card {
+      width: 140px;
+      height: 140px;
+      background: white;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+
+    .platform-card:nth-child(2) {
+      transform: translateY(-20px);
+    }
+
+    .platform-card:nth-child(5) {
+      transform: translateY(-20px);
+    }
+
+    .platform-card img {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      object-fit: contain;
+    }
+
+    .platform-card span {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    /* ========== CMS 功能截图 ========== */
+    .cms-screenshot {
+      width: 1280px;
+      height: 800px;
+      background: linear-gradient(135deg, #3a3580 0%, #2d6a87 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 80px;
+      position: relative;
+    }
+
+    .cms-visual {
+      display: flex;
+      gap: 30px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cms-card {
+      width: 200px;
+      background: white;
+      border-radius: 20px;
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+
+    .cms-card:nth-child(2) {
+      transform: translateY(-30px);
+    }
+
+    .cms-card img {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 16px;
+      object-fit: contain;
+    }
+
+    .cms-card h4 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .cms-card p {
+      font-size: 13px;
+      color: #666;
+    }
+
+    /* SVG 图标 */
+    .sync-icon {
+      fill: #6b5dae;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="section-title">1. 大横幅 (1280×800) - 主宣传图</div>
+  <div class="banner-large" id="banner-large">
+    <div class="logo">
+      <svg viewBox="0 0 24 24" class="sync-icon">
+        <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/>
+      </svg>
+    </div>
+    <h1>文章同步助手</h1>
+    <div class="tagline">一键同步文章到 29+ 自媒体平台</div>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">
+          <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        </div>
+        29+ 平台支持
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+          <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg>
+        </div>
+        CLI · MCP · OpenClaw
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+          <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+        </div>
+        开源免费
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">2. 小横幅 (440×280) - 商店瓷片图</div>
+  <div class="banner-small" id="banner-small">
+    <div class="logo">
+      <svg viewBox="0 0 24 24" class="sync-icon">
+        <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/>
+      </svg>
+    </div>
+    <h1>文章同步助手</h1>
+    <div class="tagline">一键同步文章到 29+ 自媒体平台</div>
+  </div>
+
+  <div class="section-title">3. 截图1 (1280×800) - 功能展示</div>
+  <div class="screenshot" id="screenshot-1">
+    <div class="title">一键同步，效率翻倍</div>
+    <div class="subtitle">浏览器扩展 · CLI · MCP · OpenClaw — 多入口同步到 29+ 平台</div>
+    <div class="mockup">
+      <div class="browser-window" style="width: 700px;">
+        <div class="browser-header">
+          <div class="browser-dot red"></div>
+          <div class="browser-dot yellow"></div>
+          <div class="browser-dot green"></div>
+          <div class="browser-url">mp.weixin.qq.com/cgi-bin/appmsg</div>
+        </div>
+        <div class="browser-content" style="height: 360px; display: flex; align-items: center; justify-content: center;">
+          <div style="text-align: center; color: #999;">
+            <svg width="80" height="80" fill="#6b5dae" viewBox="0 0 24 24" style="margin-bottom: 16px;"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
+            <div style="font-size: 18px; color: #333;">微信公众号编辑器</div>
+            <div style="font-size: 14px; margin-top: 8px;">在此编辑您的文章...</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 6px; padding: 10px 16px; background: #f9fafb; border-top: 1px solid #f0f0f0; flex-wrap: wrap;">
+          <span style="font-size: 11px; padding: 3px 10px; border-radius: 20px; background: #6b5dae; color: white; font-weight: 500;">公众号编辑器</span>
+          <span style="font-size: 11px; padding: 3px 10px; border-radius: 20px; background: rgba(0,0,0,0.06); color: #666;">文章阅读页</span>
+          <span style="font-size: 11px; padding: 3px 10px; border-radius: 20px; background: rgba(0,0,0,0.06); color: #666;">CLI 命令行</span>
+          <span style="font-size: 11px; padding: 3px 10px; border-radius: 20px; background: rgba(0,0,0,0.06); color: #666;">Claude AI</span>
+          <span style="font-size: 11px; padding: 3px 10px; border-radius: 20px; background: rgba(0,0,0,0.06); color: #666;">Markdown</span>
+          <span style="font-size: 11px; padding: 3px 10px; border-radius: 20px; background: rgba(0,0,0,0.06); color: #666;">OpenClaw</span>
+        </div>
+      </div>
+      <div class="popup-mockup">
+        <div class="popup-header">
+          <h3>文章同步助手</h3>
+          <p>选择要同步的平台</p>
+        </div>
+        <div class="popup-platforms">
+          <div class="popup-platform selected">
+            <img class="popup-platform-icon" src="https://www.wechatsync.com/images/zhihu.png" alt="知乎">
+            <div class="popup-platform-name">知乎</div>
+            <div class="popup-check">
+              <svg width="12" height="12" fill="white" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            </div>
+          </div>
+          <div class="popup-platform selected">
+            <img class="popup-platform-icon" src="https://www.wechatsync.com/images/juejin.png" alt="掘金">
+            <div class="popup-platform-name">掘金</div>
+            <div class="popup-check">
+              <svg width="12" height="12" fill="white" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            </div>
+          </div>
+          <div class="popup-platform">
+            <img class="popup-platform-icon" src="https://www.wechatsync.com/images/csdn.png" alt="CSDN">
+            <div class="popup-platform-name">CSDN</div>
+          </div>
+          <div class="popup-platform">
+            <img class="popup-platform-icon" src="https://www.wechatsync.com/images/toutiao.png" alt="头条号">
+            <div class="popup-platform-name">头条号</div>
+          </div>
+        </div>
+        <button class="popup-btn">同步到 2 个平台</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">4. 截图2 (1280×800) - 多平台支持</div>
+  <div class="feature-screenshot" id="screenshot-2">
+    <div class="feature-text">
+      <div class="badge">🚀 多平台 · 多入口</div>
+      <h2>一次编写<br>多处发布</h2>
+      <p>浏览器扩展 / CLI / Claude MCP / OpenClaw — 支持知乎、掘金、CSDN、头条、小红书等 29+ 平台，AI 写作一键分发。</p>
+    </div>
+    <div class="feature-visual">
+      <div class="platform-cards">
+        <div class="platform-card">
+          <img src="https://www.wechatsync.com/images/zhihu.png" alt="知乎">
+          <span>知乎</span>
+        </div>
+        <div class="platform-card">
+          <img src="https://www.wechatsync.com/images/juejin.png" alt="掘金">
+          <span>掘金</span>
+        </div>
+        <div class="platform-card">
+          <img src="https://www.wechatsync.com/images/csdn.png" alt="CSDN">
+          <span>CSDN</span>
+        </div>
+        <div class="platform-card">
+          <img src="https://www.wechatsync.com/images/toutiao.png" alt="头条号">
+          <span>头条号</span>
+        </div>
+        <div class="platform-card">
+          <img src="https://www.wechatsync.com/images/xiaohongshu.png" alt="小红书">
+          <span>小红书</span>
+        </div>
+        <div class="platform-card">
+          <img src="https://www.wechatsync.com/images/jianshu.png" alt="简书">
+          <span>简书</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">5. 截图3 (1280×800) - WordPress/CMS 支持</div>
+  <div class="cms-screenshot" id="screenshot-3">
+    <div class="feature-text">
+      <div class="badge" style="background: rgba(255,255,255,0.15);">🔧 WordPress · Typecho · 博客园</div>
+      <h2>同步到你的<br>自建站点</h2>
+      <p>REST API / XML-RPC / MetaWeblog 协议全覆盖，轻松同步到自建博客。支持 CLI 命令行批量发布。</p>
+    </div>
+    <div class="cms-visual">
+      <div class="cms-card">
+        <img src="https://www.wechatsync.com/images/wordpress-logo.svg" alt="WordPress">
+        <h4>WordPress</h4>
+        <p>REST API 支持</p>
+      </div>
+      <div class="cms-card">
+        <img src="https://www.wechatsync.com/images/typecho.png" alt="Typecho">
+        <h4>Typecho</h4>
+        <p>XML-RPC 支持</p>
+      </div>
+      <div class="cms-card">
+        <img src="https://www.wechatsync.com/images/cnblog.png" alt="博客园">
+        <h4>博客园</h4>
+        <p>MetaWeblog API</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">6. 截图4 (1280×800) - 安全特性</div>
+  <div class="feature-screenshot" id="screenshot-4" style="background: linear-gradient(135deg, #3aaed1 0%, #6b5dae 100%);">
+    <div class="feature-text">
+      <div class="badge">🔒 开源免费 · 安全可靠</div>
+      <h2>本地运行<br>数据安全</h2>
+      <p>所有数据存储在本地浏览器，不经过任何第三方服务器。5K+ GitHub Stars，源代码完全开源可审计。</p>
+    </div>
+    <div class="feature-visual">
+      <div style="background: white; border-radius: 24px; padding: 48px; box-shadow: 0 20px 60px rgba(0,0,0,0.2);">
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+          <div style="display: flex; align-items: center; gap: 20px;">
+            <div style="width: 56px; height: 56px; background: #f0eef7; border-radius: 14px; display: flex; align-items: center; justify-content: center;">
+              <svg width="28" height="28" fill="#6b5dae" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+            </div>
+            <div>
+              <div style="font-size: 18px; font-weight: 600; color: #333;">本地存储</div>
+              <div style="font-size: 14px; color: #666;">数据不离开你的设备</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 20px;">
+            <div style="width: 56px; height: 56px; background: #f0eef7; border-radius: 14px; display: flex; align-items: center; justify-content: center;">
+              <svg width="28" height="28" fill="#6b5dae" viewBox="0 0 24 24"><path d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zm0 8a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zm10 0a1 1 0 011-1h4a1 1 0 011 1v6a1 1 0 01-1 1h-4a1 1 0 01-1-1v-6z"/></svg>
+            </div>
+            <div>
+              <div style="font-size: 18px; font-weight: 600; color: #333;">样式无损</div>
+              <div style="font-size: 14px; color: #666;">图片自动上传，保持原文排版</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 20px;">
+            <div style="width: 56px; height: 56px; background: #f0eef7; border-radius: 14px; display: flex; align-items: center; justify-content: center;">
+              <svg width="28" height="28" fill="#6b5dae" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            </div>
+            <div>
+              <div style="font-size: 18px; font-weight: 600; color: #333;">草稿模式</div>
+              <div style="font-size: 14px; color: #666;">同步为草稿，检查后再发布</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">7. 微信封面 v2.0.8 (900×383) - 2.35:1 比例</div>
+  <div class="wechat-cover" id="wechat-cover-208">
+    <div class="wechat-cover-left">
+      <div class="wechat-cover-logo">
+        <svg viewBox="0 0 24 24" width="48" height="48">
+          <path d="M12,8 L8,8 C5.790861,8 4,9.790861 4,12 L4,13 C4,14.6568542 5.34314575,16 7,16 L7,18 C4.23857625,18 2,15.7614237 2,13 L2,12 C2,8.6862915 4.6862915,6 8,6 L12,6 L12,4.72799742 C12,4.62015048 12.0348702,4.51519416 12.0994077,4.42878885 C12.264656,4.2075478 12.5779675,4.16215674 12.7992086,4.32740507 L15.656242,6.46136716 C15.6951359,6.49041758 15.7295917,6.52497737 15.7585249,6.56395854 C15.9231063,6.78569617 15.876772,7.09886961 15.6550344,7.263451 L12.798001,9.3840407 C12.7118152,9.44801079 12.607332,9.48254921 12.5,9.48254921 C12.2238576,9.48254921 12,9.25869158 12,8.98254921 L12,8 Z" fill="#1e3a5f"/>
+          <path d="M12.0583175,16 L16,16 C18.209139,16 20,14.209139 20,12 L20,11 C20,9.34314575 18.6568542,8 17,8 L17,6 C19.7614237,6 22,8.23857625 22,11 L22,12 C22,15.3137085 19.3137085,18 16,18 L12.0583175,18 L12.0583175,18.9825492 C12.0583175,19.2586916 11.8344599,19.4825492 11.5583175,19.4825492 C11.4509855,19.4825492 11.3465023,19.4480108 11.2603165,19.3840407 L8.40328311,17.263451 C8.18154548,17.0988696 8.13521119,16.7856962 8.29979258,16.5639585 C8.32872576,16.5249774 8.36318164,16.4904176 8.40207551,16.4613672 L11.2591089,14.3274051 C11.48035,14.1621567 11.7936615,14.2075478 11.9589099,14.4287888 C12.0234473,14.5151942 12.0583175,14.6201505 12.0583175,14.7279974 L12.0583175,16 Z" fill="#3aaed1"/>
+        </svg>
+      </div>
+      <div class="wechat-cover-title">
+        <h2>文章同步助手</h2>
+        <span class="wechat-cover-ver">v2.0.8</span>
+      </div>
+    </div>
+    <div class="wechat-cover-items">
+      <div class="wechat-cover-item">
+        <span class="wechat-cover-emoji">🆕</span>
+        <span>新增抖音图文</span>
+      </div>
+      <div class="wechat-cover-item">
+        <span class="wechat-cover-emoji">🆕</span>
+        <span>统一同步对话框</span>
+      </div>
+      <div class="wechat-cover-item">
+        <span class="wechat-cover-emoji">🔧</span>
+        <span>CLI/MCP 桥接稳定性</span>
+      </div>
+      <div class="wechat-cover-item">
+        <span class="wechat-cover-emoji">⚙️</span>
+        <span>UI 交互优化</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">7b. 微信封面 v2.0.7 (900×383) - 2.35:1 比例</div>
+  <div class="wechat-cover" id="wechat-cover-207">
+    <div class="wechat-cover-left">
+      <div class="wechat-cover-logo">
+        <svg viewBox="0 0 24 24" width="48" height="48">
+          <path d="M12,8 L8,8 C5.790861,8 4,9.790861 4,12 L4,13 C4,14.6568542 5.34314575,16 7,16 L7,18 C4.23857625,18 2,15.7614237 2,13 L2,12 C2,8.6862915 4.6862915,6 8,6 L12,6 L12,4.72799742 C12,4.62015048 12.0348702,4.51519416 12.0994077,4.42878885 C12.264656,4.2075478 12.5779675,4.16215674 12.7992086,4.32740507 L15.656242,6.46136716 C15.6951359,6.49041758 15.7295917,6.52497737 15.7585249,6.56395854 C15.9231063,6.78569617 15.876772,7.09886961 15.6550344,7.263451 L12.798001,9.3840407 C12.7118152,9.44801079 12.607332,9.48254921 12.5,9.48254921 C12.2238576,9.48254921 12,9.25869158 12,8.98254921 L12,8 Z" fill="#1e3a5f"/>
+          <path d="M12.0583175,16 L16,16 C18.209139,16 20,14.209139 20,12 L20,11 C20,9.34314575 18.6568542,8 17,8 L17,6 C19.7614237,6 22,8.23857625 22,11 L22,12 C22,15.3137085 19.3137085,18 16,18 L12.0583175,18 L12.0583175,18.9825492 C12.0583175,19.2586916 11.8344599,19.4825492 11.5583175,19.4825492 C11.4509855,19.4825492 11.3465023,19.4480108 11.2603165,19.3840407 L8.40328311,17.263451 C8.18154548,17.0988696 8.13521119,16.7856962 8.29979258,16.5639585 C8.32872576,16.5249774 8.36318164,16.4904176 8.40207551,16.4613672 L11.2591089,14.3274051 C11.48035,14.1621567 11.7936615,14.2075478 11.9589099,14.4287888 C12.0234473,14.5151942 12.0583175,14.6201505 12.0583175,14.7279974 L12.0583175,16 Z" fill="#3aaed1"/>
+        </svg>
+      </div>
+      <div class="wechat-cover-title">
+        <h2>文章同步助手</h2>
+        <span class="wechat-cover-ver">v2.0.7</span>
+      </div>
+    </div>
+    <div class="wechat-cover-items">
+      <div class="wechat-cover-item">
+        <span class="wechat-cover-emoji">🆕</span>
+        <span>新增什么值得买、网易号</span>
+      </div>
+      <div class="wechat-cover-item">
+        <span class="wechat-cover-emoji">📝</span>
+        <span>简书 Markdown 发布</span>
+      </div>
+      <div class="wechat-cover-item">
+        <span class="wechat-cover-emoji">📄</span>
+        <span>飞书文档提取</span>
+      </div>
+      <div class="wechat-cover-item">
+        <span class="wechat-cover-emoji">🔧</span>
+        <span>多平台修复适配</span>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /* ========== 微信封面 900×383 (2.35:1) ========== */
+    .wechat-cover {
+      width: 900px;
+      height: 383px;
+      background: linear-gradient(135deg, #6b5dae 0%, #3aaed1 100%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 72px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .wechat-cover::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -15%;
+      width: 60%;
+      height: 120%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+    }
+
+    .wechat-cover-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .wechat-cover-logo {
+      width: 80px;
+      height: 80px;
+      background: white;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      flex-shrink: 0;
+    }
+
+    .wechat-cover-title h2 {
+      font-size: 36px;
+      font-weight: 800;
+      color: white;
+      margin: 0;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .wechat-cover-ver {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      padding: 4px 16px;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      color: white;
+      margin-top: 8px;
+    }
+
+    .wechat-cover-items {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .wechat-cover-item {
+      background: rgba(255,255,255,0.92);
+      border-radius: 14px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #1a1a1a;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      white-space: nowrap;
+    }
+
+    .wechat-cover-emoji {
+      font-size: 20px;
+    }
+  </style>
+
+  <div class="section-title">8. 更新封面 v2.0.8 (900×1200) - 3:4 比例</div>
+  <div class="update-cover" id="update-cover-208">
+    <div class="update-header">
+      <div class="update-badge">v2.0.8 更新</div>
+      <div class="update-logo">
+        <svg viewBox="0 0 24 24" width="72" height="72">
+          <path d="M12,8 L8,8 C5.790861,8 4,9.790861 4,12 L4,13 C4,14.6568542 5.34314575,16 7,16 L7,18 C4.23857625,18 2,15.7614237 2,13 L2,12 C2,8.6862915 4.6862915,6 8,6 L12,6 L12,4.72799742 C12,4.62015048 12.0348702,4.51519416 12.0994077,4.42878885 C12.264656,4.2075478 12.5779675,4.16215674 12.7992086,4.32740507 L15.656242,6.46136716 C15.6951359,6.49041758 15.7295917,6.52497737 15.7585249,6.56395854 C15.9231063,6.78569617 15.876772,7.09886961 15.6550344,7.263451 L12.798001,9.3840407 C12.7118152,9.44801079 12.607332,9.48254921 12.5,9.48254921 C12.2238576,9.48254921 12,9.25869158 12,8.98254921 L12,8 Z" fill="#1e3a5f"/>
+          <path d="M12.0583175,16 L16,16 C18.209139,16 20,14.209139 20,12 L20,11 C20,9.34314575 18.6568542,8 17,8 L17,6 C19.7614237,6 22,8.23857625 22,11 L22,12 C22,15.3137085 19.3137085,18 16,18 L12.0583175,18 L12.0583175,18.9825492 C12.0583175,19.2586916 11.8344599,19.4825492 11.5583175,19.4825492 C11.4509855,19.4825492 11.3465023,19.4480108 11.2603165,19.3840407 L8.40328311,17.263451 C8.18154548,17.0988696 8.13521119,16.7856962 8.29979258,16.5639585 C8.32872576,16.5249774 8.36318164,16.4904176 8.40207551,16.4613672 L11.2591089,14.3274051 C11.48035,14.1621567 11.7936615,14.2075478 11.9589099,14.4287888 C12.0234473,14.5151942 12.0583175,14.6201505 12.0583175,14.7279974 L12.0583175,16 Z" fill="#3aaed1"/>
+        </svg>
+      </div>
+      <h1>文章同步助手</h1>
+    </div>
+
+    <div class="update-content">
+      <div class="update-item new">
+        <div class="update-icon">🆕</div>
+        <div class="update-text">
+          <div class="update-title">新增抖音图文</div>
+          <div class="update-desc">抖音图文平台同步支持</div>
+        </div>
+      </div>
+
+      <div class="update-item new">
+        <div class="update-icon">🆕</div>
+        <div class="update-text">
+          <div class="update-title">统一同步对话框</div>
+          <div class="update-desc">悬浮按钮和对话框统一体验</div>
+        </div>
+      </div>
+
+      <div class="update-item fix">
+        <div class="update-icon">🔧</div>
+        <div class="update-text">
+          <div class="update-title">CLI/MCP 桥接稳定性</div>
+          <div class="update-desc">修复重连和格式异常</div>
+        </div>
+      </div>
+
+      <div class="update-item improve">
+        <div class="update-icon">⚙️</div>
+        <div class="update-text">
+          <div class="update-title">设置页增强</div>
+          <div class="update-desc">CLI 桥接服务器地址配置</div>
+        </div>
+      </div>
+
+      <div class="update-item improve">
+        <div class="update-icon">✨</div>
+        <div class="update-text">
+          <div class="update-title">UI 交互优化</div>
+          <div class="update-desc">修复多个用户反馈</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="update-footer">
+      <div class="update-slogan">一键同步到 29+ 自媒体平台</div>
+      <div class="update-slogan-sub">告别重复复制粘贴</div>
+    </div>
+  </div>
+
+  <div class="section-title">8b. 更新封面 v2.0.6 (900×1200) - 3:4 比例</div>
+  <div class="update-cover" id="update-cover-206">
+    <div class="update-header">
+      <div class="update-badge">v2.0.6 更新</div>
+      <div class="update-logo">
+        <svg viewBox="0 0 24 24" width="72" height="72">
+          <path d="M12,8 L8,8 C5.790861,8 4,9.790861 4,12 L4,13 C4,14.6568542 5.34314575,16 7,16 L7,18 C4.23857625,18 2,15.7614237 2,13 L2,12 C2,8.6862915 4.6862915,6 8,6 L12,6 L12,4.72799742 C12,4.62015048 12.0348702,4.51519416 12.0994077,4.42878885 C12.264656,4.2075478 12.5779675,4.16215674 12.7992086,4.32740507 L15.656242,6.46136716 C15.6951359,6.49041758 15.7295917,6.52497737 15.7585249,6.56395854 C15.9231063,6.78569617 15.876772,7.09886961 15.6550344,7.263451 L12.798001,9.3840407 C12.7118152,9.44801079 12.607332,9.48254921 12.5,9.48254921 C12.2238576,9.48254921 12,9.25869158 12,8.98254921 L12,8 Z" fill="#1e3a5f"/>
+          <path d="M12.0583175,16 L16,16 C18.209139,16 20,14.209139 20,12 L20,11 C20,9.34314575 18.6568542,8 17,8 L17,6 C19.7614237,6 22,8.23857625 22,11 L22,12 C22,15.3137085 19.3137085,18 16,18 L12.0583175,18 L12.0583175,18.9825492 C12.0583175,19.2586916 11.8344599,19.4825492 11.5583175,19.4825492 C11.4509855,19.4825492 11.3465023,19.4480108 11.2603165,19.3840407 L8.40328311,17.263451 C8.18154548,17.0988696 8.13521119,16.7856962 8.29979258,16.5639585 C8.32872576,16.5249774 8.36318164,16.4904176 8.40207551,16.4613672 L11.2591089,14.3274051 C11.48035,14.1621567 11.7936615,14.2075478 11.9589099,14.4287888 C12.0234473,14.5151942 12.0583175,14.6201505 12.0583175,14.7279974 L12.0583175,16 Z" fill="#3aaed1"/>
+        </svg>
+      </div>
+      <h1>文章同步助手</h1>
+    </div>
+
+    <div class="update-content">
+      <div class="update-item new">
+        <div class="update-icon">🆕</div>
+        <div class="update-text">
+          <div class="update-title">新增东方财富</div>
+          <div class="update-desc">@mayaohua 贡献</div>
+        </div>
+      </div>
+
+      <div class="update-item new">
+        <div class="update-icon">🪄</div>
+        <div class="update-text">
+          <div class="update-title">悬浮同步按钮</div>
+          <div class="update-desc">设置中开启，默认关闭</div>
+        </div>
+      </div>
+
+      <div class="update-item new">
+        <div class="update-icon">🖥️</div>
+        <div class="update-text">
+          <div class="update-title">CLI 命令行工具</div>
+          <div class="update-desc">npm install -g @wechatsync/cli</div>
+        </div>
+      </div>
+
+      <div class="update-item new">
+        <div class="update-icon">🤖</div>
+        <div class="update-text">
+          <div class="update-title">Claude Code Skill 集成</div>
+          <div class="update-desc">AI 一键发布文章</div>
+        </div>
+      </div>
+
+      <div class="update-item fix">
+        <div class="update-icon">🔧</div>
+        <div class="update-text">
+          <div class="update-title">图片上传修复</div>
+          <div class="update-desc">WordPress / Typecho 扩展名问题</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="update-footer">
+      <div class="update-slogan">一键同步到 29+ 自媒体平台</div>
+      <div class="update-slogan-sub">告别重复复制粘贴</div>
+    </div>
+  </div>
+
+  <div class="section-title">8. 更新封面 v2.0.5 (900×1200) - 3:4 比例</div>
+  <div class="update-cover" id="update-cover-205">
+    <div class="update-header">
+      <div class="update-badge">v2.0.5 更新</div>
+      <div class="update-logo">
+        <svg viewBox="0 0 24 24" width="72" height="72">
+          <path d="M12,8 L8,8 C5.790861,8 4,9.790861 4,12 L4,13 C4,14.6568542 5.34314575,16 7,16 L7,18 C4.23857625,18 2,15.7614237 2,13 L2,12 C2,8.6862915 4.6862915,6 8,6 L12,6 L12,4.72799742 C12,4.62015048 12.0348702,4.51519416 12.0994077,4.42878885 C12.264656,4.2075478 12.5779675,4.16215674 12.7992086,4.32740507 L15.656242,6.46136716 C15.6951359,6.49041758 15.7295917,6.52497737 15.7585249,6.56395854 C15.9231063,6.78569617 15.876772,7.09886961 15.6550344,7.263451 L12.798001,9.3840407 C12.7118152,9.44801079 12.607332,9.48254921 12.5,9.48254921 C12.2238576,9.48254921 12,9.25869158 12,8.98254921 L12,8 Z" fill="#1e3a5f"/>
+          <path d="M12.0583175,16 L16,16 C18.209139,16 20,14.209139 20,12 L20,11 C20,9.34314575 18.6568542,8 17,8 L17,6 C19.7614237,6 22,8.23857625 22,11 L22,12 C22,15.3137085 19.3137085,18 16,18 L12.0583175,18 L12.0583175,18.9825492 C12.0583175,19.2586916 11.8344599,19.4825492 11.5583175,19.4825492 C11.4509855,19.4825492 11.3465023,19.4480108 11.2603165,19.3840407 L8.40328311,17.263451 C8.18154548,17.0988696 8.13521119,16.7856962 8.29979258,16.5639585 C8.32872576,16.5249774 8.36318164,16.4904176 8.40207551,16.4613672 L11.2591089,14.3274051 C11.48035,14.1621567 11.7936615,14.2075478 11.9589099,14.4287888 C12.0234473,14.5151942 12.0583175,14.6201505 12.0583175,14.7279974 L12.0583175,16 Z" fill="#3aaed1"/>
+        </svg>
+      </div>
+      <h1>文章同步助手</h1>
+    </div>
+
+    <div class="update-content">
+      <div class="update-item improve">
+        <div class="update-icon">📦</div>
+        <div class="update-text">
+          <div class="update-title">代码块兼容性提升</div>
+          <div class="update-desc">支持更多格式</div>
+        </div>
+      </div>
+
+      <div class="update-item fix">
+        <div class="update-icon">🔧</div>
+        <div class="update-text">
+          <div class="update-title">修复 OSChina</div>
+          <div class="update-desc">开源中国平台修复</div>
+        </div>
+      </div>
+
+      <div class="update-item new">
+        <div class="update-icon">🆕</div>
+        <div class="update-text">
+          <div class="update-title">Markdown 压缩包下载</div>
+          <div class="update-desc">适用于 Hexo, Hugo 等博客同步</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="update-footer">
+      <div class="update-slogan">一键同步到 29+ 自媒体平台</div>
+      <div class="update-slogan-sub">告别重复复制粘贴</div>
+    </div>
+  </div>
+
+  <div class="section-title">8. 更新封面 v2.0.4 (900×1200) - 3:4 比例</div>
+  <div class="update-cover" id="update-cover-204">
+    <div class="update-header">
+      <div class="update-badge">v2.0.4 更新</div>
+      <div class="update-logo">
+        <svg viewBox="0 0 24 24" width="72" height="72">
+          <path d="M12,8 L8,8 C5.790861,8 4,9.790861 4,12 L4,13 C4,14.6568542 5.34314575,16 7,16 L7,18 C4.23857625,18 2,15.7614237 2,13 L2,12 C2,8.6862915 4.6862915,6 8,6 L12,6 L12,4.72799742 C12,4.62015048 12.0348702,4.51519416 12.0994077,4.42878885 C12.264656,4.2075478 12.5779675,4.16215674 12.7992086,4.32740507 L15.656242,6.46136716 C15.6951359,6.49041758 15.7295917,6.52497737 15.7585249,6.56395854 C15.9231063,6.78569617 15.876772,7.09886961 15.6550344,7.263451 L12.798001,9.3840407 C12.7118152,9.44801079 12.607332,9.48254921 12.5,9.48254921 C12.2238576,9.48254921 12,9.25869158 12,8.98254921 L12,8 Z" fill="#1e3a5f"/>
+          <path d="M12.0583175,16 L16,16 C18.209139,16 20,14.209139 20,12 L20,11 C20,9.34314575 18.6568542,8 17,8 L17,6 C19.7614237,6 22,8.23857625 22,11 L22,12 C22,15.3137085 19.3137085,18 16,18 L12.0583175,18 L12.0583175,18.9825492 C12.0583175,19.2586916 11.8344599,19.4825492 11.5583175,19.4825492 C11.4509855,19.4825492 11.3465023,19.4480108 11.2603165,19.3840407 L8.40328311,17.263451 C8.18154548,17.0988696 8.13521119,16.7856962 8.29979258,16.5639585 C8.32872576,16.5249774 8.36318164,16.4904176 8.40207551,16.4613672 L11.2591089,14.3274051 C11.48035,14.1621567 11.7936615,14.2075478 11.9589099,14.4287888 C12.0234473,14.5151942 12.0583175,14.6201505 12.0583175,14.7279974 L12.0583175,16 Z" fill="#3aaed1"/>
+        </svg>
+      </div>
+      <h1>文章同步助手</h1>
+    </div>
+
+    <div class="update-content">
+      <div class="update-item new">
+        <div class="update-icon">🆕</div>
+        <div class="update-text">
+          <div class="update-title">新增博客园</div>
+          <div class="update-desc">cnblogs 平台支持</div>
+        </div>
+      </div>
+
+      <div class="update-item fix">
+        <div class="update-icon">🐛</div>
+        <div class="update-text">
+          <div class="update-title">修复代码块处理</div>
+          <div class="update-desc">代码块渲染 BUG 修复</div>
+        </div>
+      </div>
+
+      <div class="update-item improve">
+        <div class="update-icon">📦</div>
+        <div class="update-text">
+          <div class="update-title">排版预兼容</div>
+          <div class="update-desc">提升排版稳定性</div>
+        </div>
+      </div>
+
+      <div class="update-item fix">
+        <div class="update-icon">🔧</div>
+        <div class="update-text">
+          <div class="update-title">平台修复</div>
+          <div class="update-desc">Typecho / X</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="update-footer">
+      <div class="update-slogan">一键同步到 29+ 自媒体平台</div>
+      <div class="update-slogan-sub">告别重复复制粘贴</div>
+    </div>
+  </div>
+
+  <div class="section-title">8. 更新封面 v2.0.3 (900×1200) - 3:4 比例</div>
+  <div class="update-cover" id="update-cover">
+    <div class="update-header">
+      <div class="update-badge">v2.0.3 更新</div>
+      <div class="update-logo">
+        <svg viewBox="0 0 24 24" width="72" height="72">
+          <path d="M12,8 L8,8 C5.790861,8 4,9.790861 4,12 L4,13 C4,14.6568542 5.34314575,16 7,16 L7,18 C4.23857625,18 2,15.7614237 2,13 L2,12 C2,8.6862915 4.6862915,6 8,6 L12,6 L12,4.72799742 C12,4.62015048 12.0348702,4.51519416 12.0994077,4.42878885 C12.264656,4.2075478 12.5779675,4.16215674 12.7992086,4.32740507 L15.656242,6.46136716 C15.6951359,6.49041758 15.7295917,6.52497737 15.7585249,6.56395854 C15.9231063,6.78569617 15.876772,7.09886961 15.6550344,7.263451 L12.798001,9.3840407 C12.7118152,9.44801079 12.607332,9.48254921 12.5,9.48254921 C12.2238576,9.48254921 12,9.25869158 12,8.98254921 L12,8 Z" fill="#1e3a5f"/>
+          <path d="M12.0583175,16 L16,16 C18.209139,16 20,14.209139 20,12 L20,11 C20,9.34314575 18.6568542,8 17,8 L17,6 C19.7614237,6 22,8.23857625 22,11 L22,12 C22,15.3137085 19.3137085,18 16,18 L12.0583175,18 L12.0583175,18.9825492 C12.0583175,19.2586916 11.8344599,19.4825492 11.5583175,19.4825492 C11.4509855,19.4825492 11.3465023,19.4480108 11.2603165,19.3840407 L8.40328311,17.263451 C8.18154548,17.0988696 8.13521119,16.7856962 8.29979258,16.5639585 C8.32872576,16.5249774 8.36318164,16.4904176 8.40207551,16.4613672 L11.2591089,14.3274051 C11.48035,14.1621567 11.7936615,14.2075478 11.9589099,14.4287888 C12.0234473,14.5151942 12.0583175,14.6201505 12.0583175,14.7279974 L12.0583175,16 Z" fill="#3aaed1"/>
+        </svg>
+      </div>
+      <h1>文章同步助手</h1>
+    </div>
+
+    <div class="update-content">
+      <div class="update-item new">
+        <div class="update-icon">🆕</div>
+        <div class="update-text">
+          <div class="update-title">小红书同步</div>
+          <div class="update-desc">长文笔记保存为草稿</div>
+        </div>
+      </div>
+
+      <div class="update-item new">
+        <div class="update-icon">🆕</div>
+        <div class="update-text">
+          <div class="update-title">X (Twitter)</div>
+          <div class="update-desc">新增同步渠道</div>
+        </div>
+      </div>
+
+      <div class="update-item fix">
+        <div class="update-icon">🔧</div>
+        <div class="update-text">
+          <div class="update-title">平台适配修复</div>
+          <div class="update-desc">OSChina / SegmentFault / 51CTO / Imooc</div>
+        </div>
+      </div>
+
+      <div class="update-item fix">
+        <div class="update-icon">🔄</div>
+        <div class="update-text">
+          <div class="update-title">编辑器 API 恢复</div>
+          <div class="update-desc">window.syncPost / window.$syncer</div>
+        </div>
+      </div>
+
+      <div class="update-item improve">
+        <div class="update-icon">⚡</div>
+        <div class="update-text">
+          <div class="update-title">稳定性提升</div>
+          <div class="update-desc">修复若干 BUG</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="update-footer">
+      <div class="update-slogan">一键同步到 29+ 自媒体平台</div>
+      <div class="update-slogan-sub">告别重复复制粘贴</div>
+    </div>
+  </div>
+
+  <style>
+    /* ========== 更新封面 900×1200 (3:4) ========== */
+    .update-cover {
+      width: 900px;
+      height: 1200px;
+      background: linear-gradient(160deg, #6b5dae 0%, #3aaed1 100%);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .update-cover::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -20%;
+      width: 80%;
+      height: 80%;
+      background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 60%);
+    }
+
+    .update-cover::after {
+      content: '';
+      position: absolute;
+      bottom: -20%;
+      left: -20%;
+      width: 60%;
+      height: 60%;
+      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 50%);
+    }
+
+    .update-header {
+      padding: 80px 60px 40px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .update-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      padding: 12px 32px;
+      border-radius: 30px;
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 40px;
+      letter-spacing: 2px;
+    }
+
+    .update-logo {
+      width: 120px;
+      height: 120px;
+      background: white;
+      border-radius: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 32px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.2);
+    }
+
+    .update-logo svg {
+      width: 72px;
+      height: 72px;
+    }
+
+    .update-header h1 {
+      font-size: 52px;
+      font-weight: 800;
+      color: white;
+      text-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    }
+
+    .update-content {
+      flex: 1;
+      padding: 40px 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .update-item {
+      background: rgba(255,255,255,0.95);
+      border-radius: 24px;
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .update-item:hover {
+      transform: translateX(8px);
+    }
+
+    .update-icon {
+      font-size: 40px;
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #e0f4f8;
+      border-radius: 16px;
+      flex-shrink: 0;
+    }
+
+    .update-item.new .update-icon {
+      background: #edf8fc;
+    }
+
+    .update-item.fix .update-icon {
+      background: #fef3c7;
+    }
+
+    .update-item.improve .update-icon {
+      background: #f0eef7;
+    }
+
+    .update-text {
+      flex: 1;
+    }
+
+    .update-title {
+      font-size: 26px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 6px;
+    }
+
+    .update-desc {
+      font-size: 18px;
+      color: #666;
+    }
+
+    .update-footer {
+      padding: 40px 60px 80px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .update-slogan {
+      font-size: 28px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.95);
+      margin-bottom: 8px;
+    }
+
+    .update-slogan-sub {
+      font-size: 20px;
+      color: rgba(255,255,255,0.7);
+    }
+  </style>
+
+</body>
+</html>
