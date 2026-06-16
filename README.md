@@ -1,4 +1,5 @@
 # 小叶发布器 / Article-published
+<img width="2559" height="1398" alt="image" src="https://github.com/user-attachments/assets/1caa6a5a-361c-47dc-8cfe-be694b807c09" />
 
 ## 支持 11+ 内容平台
 
