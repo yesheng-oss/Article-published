@@ -24,13 +24,6 @@
 - 文章提取：支持从当前标签页提取标题、正文、封面和摘要。
 - 草稿保存：把文章保存到已登录平台的草稿箱。
 - MCP 服务：让 AI 客户端通过工具调用浏览器发布能力。
-- 本地分发：不依赖 Chrome Web Store，用户可以从 GitHub 下载后本地加载。
-
-## 环境要求
-
-- Node.js 20 或更高版本
-- Chrome 或 Edge 浏览器
-- 一个支持 MCP 的客户端，例如 Claude Desktop、Codex、WorkBuddy 或 Hermes
 
 ## 快速开始
 
