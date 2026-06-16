@@ -1,10 +1,18 @@
 # 小叶发布器 / Article-published
-
-> AI 驱动的本地文章发布助手：连接浏览器扩展与 MCP 客户端，把当前网页文章提取出来，并保存到多个内容平台草稿箱。
-
-小叶发布器适合自媒体作者、技术博主和经常使用 AI 写作的人。你可以让 Claude、Codex、WorkBuddy、Hermes 等支持 MCP 的客户端调用本地浏览器扩展，读取当前页面内容，使用浏览器已有登录状态，把文章保存到公众号、知乎、掘金、CSDN 等平台草稿箱。
-
-项目默认坚持“草稿优先”：AI 只负责提取、整理和创建草稿，最终发布仍然由你自己在平台后台确认。
+支持 11+ 内容平台
+平台	ID	类型	状态
+微信公众号	weixin	主流自媒体	✅
+小红书	xiaohongshu	主流自媒体	✅
+哔哩哔哩	bilibili	视频平台	✅
+微博	weibo	主流自媒体	✅
+CSDN	csdn	技术社区	✅
+知乎	zhihu	知识社区	✅
+掘金	juejin	技术社区	✅
+百家号	baijiahao	内容平台	✅
+雪球	xueqiu	财经社区	✅
+人人都是产品经理	woshipm	产品社区	✅
+Markdown 压缩包	markdown_zip	本地导出	✅
+语雀	yuque	文档平台	✅
 
 ## 主要能力
 
